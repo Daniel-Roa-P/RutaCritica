@@ -106,9 +106,9 @@ class Nodo {
 
         this.id = id;
         this.duracion = 0;
-        this.predecesores = 0;
-        this.nodosPadre = null;
-        this.dependientes = 0;
+        this.predecesores = "";
+        this.nodosPadre = [];
+        this.nodosHijos = [];
         this.inicioCercano = 0;
         this.inicioLejano = 0;
         this.finalCercano = 0;
@@ -119,6 +119,18 @@ class Nodo {
     getId(){
 
         return this.id;
+
+    }
+
+    setNodosHijo(lista){
+
+        this.nodosHijos = lista;
+
+    }
+
+    getNodosHijo(){
+
+        return this.nodosHijos;
 
     }
 
@@ -212,7 +224,7 @@ function enviarTabla(){
 
     var nodos = [];
 
-    // nodos.push( new Nodo("") );
+    nodos.push( new Nodo("") );
 
     actividades = document.getElementById("texto").value;
     actividades = parseInt(actividades);
@@ -245,14 +257,13 @@ function enviarTabla(){
 
     }   
 
-    var i = 0;
+    var i = 1;
 
     while(i<nodos.length){
 
         tempNodo = nodos[i];
         padres = [];
         var letra = tempNodo.getPredecesores();
-        console.log(letra);
         var tamaño = letra.length;
         var l = 0;
 
@@ -266,7 +277,8 @@ function enviarTabla(){
     
                     if(tempPadre.getId() == letra[l] ){
     
-                        padres.push(tempPadre);
+                        tempNodo.getNodosPadre().push(tempPadre);
+                        tempPadre.getNodosHijo().push(tempNodo);
     
                     }
     
@@ -277,14 +289,19 @@ function enviarTabla(){
             l = l + 2;
 
         }
+
+        console.log(letra);
+
+        if(letra == ""){
+
+            nodos[0].getNodosHijo().push(tempNodo);
+
+        }
         
-        tempNodo.setNodosPadre(padres);
         i++;
 
     }
 
     console.log(nodos);
-
-    
 
 }
