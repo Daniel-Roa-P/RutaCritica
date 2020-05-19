@@ -113,6 +113,7 @@ class Nodo {
         this.inicioLejano = 0;
         this.finalCercano = 0;
         this.finalLejano = 0;
+        this.color = "";
 
     }
     
@@ -304,4 +305,181 @@ function enviarTabla(){
 
     console.log(nodos);
 
+    crearGrafico(nodos);
+
+}
+
+function crearGrafico( nodo) {
+    let divGrafico = document.getElementById("grafico");
+    for(i = 1; i <nodo.length; i ++) {
+        let divNodo = document.createElement("div");
+        divNodo.setAttribute("id", "divNodo");
+        let nodoActual = nodo[i];
+        var color = "";
+        switch(nodoActual.id) {
+            case "A":
+                color = "#E08E79";
+                break;
+            case "B":
+                color = "#FC9D9A";
+                break;
+            case "C":
+                color = "#F9CDAD";
+                break;
+            case "D":
+                color = "#C8C8A9";
+                break;
+            case "E":
+                color = "#83AF9B";
+                break;
+            case "F":
+                color = "#FCEEB8";
+                break;
+            case "G":
+                color = "#FC7BD5";
+                break;
+            case "H":
+                color = "#C4EBFC";
+                break;
+        }
+        divNodo.style.background = color;
+        if(nodoActual.nodosPadre.length == 0) {
+            let divInicio = document.createElement("div");
+            let divDescripcion = document.createElement("div");
+            let imagenRaiz = document.createElement("img");
+            divInicio.setAttribute("id", "divInicio");
+            divDescripcion.setAttribute("id", "divDescripcion");
+
+            imagenRaiz.setAttribute("src", "./assets/inicio.png");
+
+            divInicio.append(imagenRaiz);
+
+
+            let titulo = document.createElement("span");
+            titulo.innerText = nodoActual.id;
+            divDescripcion.appendChild(titulo);
+
+            let inicioCercano = document.createElement("span");
+            inicioCercano.innerText = "Inicio cercano :" + nodoActual.inicioCercano; 
+            divDescripcion.appendChild(inicioCercano);
+
+            let inicioTardio = document.createElement("span");
+            inicioTardio.innerText = "Inicio tardio :" + nodoActual.inicioLejano;
+            divDescripcion.appendChild(inicioTardio);
+
+            let finalCercano = document.createElement("span");
+            finalCercano.innerText = "Final cercano :" + nodoActual.finalCercano;
+            divDescripcion.appendChild(finalCercano);
+
+             let finalTardio = document.createElement("span");
+            finalTardio.innerText = "Final tardio :" + nodoActual.finalLejano;
+            divDescripcion.appendChild(finalTardio);
+
+            divNodo.style.background = "none";
+            divDescripcion.style.background = "#E08E79";
+            divNodo.appendChild(divInicio);
+            divNodo.appendChild(divDescripcion);
+
+        } else {
+            let divsPadre = document.createElement("div");
+            divsPadre.setAttribute("id", "divsPadre");
+            
+            let divDescripcion = document.createElement("div");
+            divDescripcion.setAttribute("id", "divDescripcion");
+            
+            let titulo = document.createElement("span");
+            titulo.innerText = nodoActual.id;
+            divDescripcion.appendChild(titulo);
+
+            let inicioCercano = document.createElement("span");
+            inicioCercano.innerText = "Inicio cercano :" + nodoActual.inicioCercano; 
+            divDescripcion.appendChild(inicioCercano);
+
+            let inicioTardio = document.createElement("span");
+            inicioTardio.innerText = "Inicio tardio :" + nodoActual.inicioLejano;
+            divDescripcion.appendChild(inicioTardio);
+
+            let finalCercano = document.createElement("span");
+            finalCercano.innerText = "Final cercano :" + nodoActual.finalCercano;
+            divDescripcion.appendChild(finalCercano);
+
+             let finalTardio = document.createElement("span");
+            finalTardio.innerText = "Final tardio :" + nodoActual.finalLejano;
+            divDescripcion.appendChild(finalTardio);
+
+
+            for (j=0; j< nodoActual.nodosPadre.length; j++) {
+                var color = "";
+                switch(nodoActual.nodosPadre[j].id) {
+                    case "A":
+                        color = "#E08E79";
+                        break;
+                    case "B":
+                        color = "#FC9D9A";
+                        break;
+                    case "C":
+                        color = "#F9CDAD";
+                        break;
+                    case "D":
+                        color = "#C8C8A9";
+                        break;
+                    case "E":
+                        color = "#83AF9B";
+                        break;
+                    case "F":
+                        color = "#FCEEB8";
+                        break;
+                    case "G":
+                        color = "#FC7BD5";
+                        break;
+                    case "H":
+                        color = "#C4EBFC";
+                        break;
+                }
+
+
+                let divPadre = document.createElement("div");
+                divPadre.setAttribute("id", "divPadre");
+                let titulo = document.createElement("span");
+                titulo.innerText = "Nodo padre " + nodoActual.nodosPadre[j].id;
+                titulo.style.width = "100%";
+                divPadre.appendChild(titulo);
+                let inicioCercano = document.createElement("span");
+                inicioCercano.innerText = "Inicio cercano " + nodoActual.nodosPadre[j].inicioCercano; 
+                divPadre.appendChild(inicioCercano);
+    
+                let inicioTardio = document.createElement("span");
+                inicioTardio.innerText = "Inicio tardio " + nodoActual.nodosPadre[j].inicioLejano;
+                divPadre.appendChild(inicioTardio);
+    
+                let finalCercano = document.createElement("span");
+                finalCercano.innerText = "Final cercano " + nodoActual.nodosPadre[j].finalCercano;
+                divPadre.appendChild(finalCercano);
+    
+                let finalTardio = document.createElement("span");
+                finalTardio.innerText = "Final tardio " + nodoActual.nodosPadre[j].finalLejano;
+
+                divPadre.style.background = color;
+                divPadre.appendChild(finalTardio);
+                
+
+                divsPadre.appendChild(divPadre);
+
+            }
+
+            
+            divNodo.append(divsPadre);
+            divNodo.appendChild(divDescripcion);
+
+        }
+
+        divGrafico.append(divNodo);
+    }
+    let divFinal = document.createElement("div");
+    let imagenFinal = document.createElement("img");
+    divFinal.setAttribute("id", "divFinal");
+    imagenFinal.setAttribute("src", "./assets/fin.png");
+
+    divFinal.appendChild(imagenFinal);
+    divGrafico.appendChild(divFinal); 
 }

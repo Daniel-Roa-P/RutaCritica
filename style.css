@@ -12,7 +12,7 @@ table{
 }
 
 hr{
-    width=50%;
+    width:50%;
 }
 
 P {color:red; 
@@ -27,3 +27,61 @@ P {color:red;
    text-align:left;
    text-indent:30px;
   }
+
+  #grafico {
+      border: 1px solid black;
+      display: flex;
+      flex-direction: column;
+
+  }
+
+  #divPadre{
+      border: 1px solid black;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;     
+  }
+
+  
+  #divNodo {
+      border: 1px solid black;
+    display: flex;
+  }
+
+#divInicio{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    
+ }
+ #divInicio img {
+     width:20%;
+     margin: 2%;
+ }
+
+#divDescripcion {
+    border: 1px solid black;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+} 
+ #divsPadre{
+     display: flex;
+     flex-direction: column;
+ }
+
+ #divFinal { 
+    border: 1px solid black;
+
+ }
+
+ #divFinal img {
+    width:10%;
+    margin: 2%;
+ }
